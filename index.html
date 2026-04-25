@@ -128,47 +128,6 @@ body{background:#F5F3F0;display:flex;align-items:center;justify-content:center;m
 @keyframes spin{to{transform:rotate(360deg);}}
 .load-text{font-size:13px;color:var(--text-sec);line-height:1.6;}
 .load-topic{font-size:15px;font-weight:600;color:var(--text);}
-
-  /* ── IN-APP PRODUCT CARD ── */
-  .app-product-card {
-    margin: 28px 0 0;
-    background: #fff;
-    border: 1.5px solid #ebebeb;
-    border-radius: 18px;
-    overflow: hidden;
-    text-align: left;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-  }
-  .app-product-topbar {
-    height: 3px;
-    background: linear-gradient(90deg, #FF4D00, #ff8c42);
-  }
-  .app-product-body { padding: 20px 18px 8px; }
-  .app-product-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #FF4D00; margin-bottom: 8px;
-  }
-  .app-product-flex { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
-  .app-product-icon {
-    width: 54px; height: 54px; flex-shrink: 0;
-    background: linear-gradient(135deg, #FF4D00, #ff8c42);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px;
-  }
-  .app-product-title { font-size: 16px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; line-height: 1.2; }
-  .app-product-brand { font-size: 12px; color: #888; }
-  .app-product-pitch { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 14px; }
-  .app-product-link {
-    display: block; width: 100%; text-align: center;
-    background: #FF4D00; color: #fff; font-weight: 700; font-size: 14px;
-    text-decoration: none; padding: 13px;
-    border-radius: 0 0 16px 16px;
-    transition: background 0.2s;
-  }
-  .app-product-link:hover { background: #e04400; }
-  .app-product-disclaimer { font-size: 10px; color: #bbb; text-align: center; padding: 6px 0 14px; }
-
 </style>
 </head>
 <body>
@@ -400,7 +359,7 @@ function showResults(){
   const offset=C*(1-pct/100);
   const color=passed?'#639922':'#E24B4A';
   const bd=state.answers.map((a,i)=>{const q=state.questions[i];return'<div class="bd-row"><div class="bd-q">Q'+(i+1)+'. '+q.q.slice(0,52)+(q.q.length>52?'…':'')+'</div><div class="bd-mark '+(a.ok?'c':'w')+'">'+(a.ok?'✓':'✗')+'</div></div>';}).join('');
-  document.getElementById('results-inner').innerHTML='<div style="text-align:center;margin-bottom:16px;"><div class="wordmark-sm">learn<span style="color:#FF4D00">then</span>scroll</div></div><div class="score-ring-wrap"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65" cy="65" r="56" fill="none" stroke="#F5F3F0" stroke-width="10"/><circle cx="65" cy="65" r="56" fill="none" stroke="'+color+'" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+offset.toFixed(1)+'" style="transition:stroke-dashoffset 1s ease"/></svg><div class="score-center"><div class="score-num">'+correct+'/'+total+'</div><div class="score-denom">'+pct+'%</div></div></div><div class="result-headline">'+(passed?'Quiz passed!':'Not quite there')+'</div><div class="result-sub">'+(passed?'You nailed '+state.topic+'. Your feed is officially earned.':'You need 70% to pass. Re-read and retry.')+'</div>'+(passed?'<div class="streak-celebrate"><div class="streak-num">'+(state.streak+1)+' days</div><div class="streak-lbl">keep the streak alive tomorrow</div></div>':'')+'<div class="breakdown">'+bd+'</div>'+(passed?'<button class="btn-primary" onclick="show(\'search\')">Learn something new →</button>'+'<div class="app-product-card"><div class="app-product-topbar"></div><div class="app-product-body"><div class="app-product-label">🛍 Recommended for you</div><div class="app-product-flex"><div class="app-product-icon">💆</div><div><div class="app-product-title">Nu Skin LumiSpa</div><div class="app-product-brand">Nu Skin</div></div></div><div class="app-product-pitch">You just proved you show up for your mind. Why not show up for your skin? The LumiSpa delivers a 10× deeper clean and clinically-proven firming — in 2 minutes a day.</div><div class="app-product-disclaimer">Affiliate link — we may earn a small commission at no extra cost to you.</div></div><a class="app-product-link" href="https://nskn.co/4rIDmY" target="_blank" rel="noopener">Shop LumiSpa →</a></div>':'<button class="btn-primary" onclick="startQuiz()">Retry quiz →</button><button class="btn-ghost" onclick="show(\'article\')">Re-read the article</button>');
+  document.getElementById('results-inner').innerHTML='<div style="text-align:center;margin-bottom:16px;"><div class="wordmark-sm">learn<span style="color:#FF4D00">then</span>scroll</div></div><div class="score-ring-wrap"><svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65" cy="65" r="56" fill="none" stroke="#F5F3F0" stroke-width="10"/><circle cx="65" cy="65" r="56" fill="none" stroke="'+color+'" stroke-width="10" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+offset.toFixed(1)+'" style="transition:stroke-dashoffset 1s ease"/></svg><div class="score-center"><div class="score-num">'+correct+'/'+total+'</div><div class="score-denom">'+pct+'%</div></div></div><div class="result-headline">'+(passed?'Quiz passed!':'Not quite there')+'</div><div class="result-sub">'+(passed?'You nailed '+state.topic+'. Your feed is officially earned.':'You need 70% to pass. Re-read and retry.')+'</div>'+(passed?'<div class="streak-celebrate"><div class="streak-num">'+(state.streak+1)+' days</div><div class="streak-lbl">keep the streak alive tomorrow</div></div>':'')+'<div class="breakdown">'+bd+'</div>'+(passed?'<button class="btn-primary" onclick="show(\'search\')">Learn something new →</button>':'<button class="btn-primary" onclick="startQuiz()">Retry quiz →</button><button class="btn-ghost" onclick="show(\'article\')">Re-read the article</button>');
   if(passed)state.streak++;
 }
 </script>
